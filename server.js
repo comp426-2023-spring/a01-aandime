@@ -1,8 +1,8 @@
 // Require http module
-const http = require('http')
+import { createServer } from 'http'
 
 // Require fs module;
-const fs = require('fs')
+import { readFile } from 'fs'
 
 // Require minimist module (make sure you install this one via npm).
 const argument = require('minimist')(process.argv.slice(2))
@@ -16,13 +16,13 @@ const port = argument.port || 3000
 // Use the documentation for the Node.js `fs` module. 
 // The function must read a file located at `./public/index.html` and do some stuff with it.
 // The stuff that should be inside this function is all below.
-fs.readFile('./public/index.html', 'utf8', (err, data) => {
+readFile('./public/index.html', 'utf8', (err, data) => {
   if (err) {
     console.error(err)
     return
   }
   
-  const server = http.createServer((req, res) => {
+  const server = createServer((req, res) => {
     res.statusCode = 200
     res.setHeader('Content-Type', 'text/html')
     res.end(data)
